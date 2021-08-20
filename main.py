@@ -72,8 +72,7 @@ def getAllProducts(min_products, search):
 
 if __name__ == '__main__':
 
-    products = getAllProducts(10, 'teclado gaming')
-
+    
     for product in products:
         print('---------------------------------------------')
         print('ASIM:    '+product['ASIN'])
@@ -82,8 +81,18 @@ if __name__ == '__main__':
         print('PRICE:   '+product['PRICE'])
 
     
+import json
 
-        
+def lambda_handler(event, context):
+    search = event.get('search')
+    count = event.get('count')
+
+    products = getAllProducts(count, search)
+
+    return {
+        'statusCode': 200,
+        'products': products
+    } 
         
         
         
